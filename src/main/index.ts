@@ -2,6 +2,17 @@ import { app, BrowserWindow, ipcMain, Tray, globalShortcut } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import fs from 'node:fs'
+
+const configPath = './config.json'
+
+// Carregar configurações
+let config
+try {
+  config = JSON.parse(fs.readFileSync(configPath, 'utf-8'))
+} catch (err) {
+  config = { width: 500, height: 500 }
+}
 
 let tray: Tray | null = null
 let mainWindow: BrowserWindow | null = null
@@ -9,12 +20,12 @@ let mainWindow: BrowserWindow | null = null
 function createWindow(): void {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 500,
-    height: 500,
+    width: config.width,
+    height: config.height,
     show: false,
     frame: false,
-    resizable: false,
-    alwaysOnTop: true, // Adicione esta linha
+    resizable: true,
+    alwaysOnTop: true,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
@@ -89,9 +100,16 @@ app.whenReady().then(() => {
   })
 })
 
+// Salvar configurações quando a janela for fechada
+
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
+  }
+
+  if (mainWindow) {
+    const [width, height] = mainWindow.getSize()
+    fs.writeFileSync(configPath, JSON.stringify({ width, height }))
   }
 })
 
