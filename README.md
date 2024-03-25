@@ -1,35 +1,14 @@
-# tray-electron-todo
+<h1> Tray electron to-do
 
-An Electron application with React and TypeScript
+A simple to-do app, in the tray bar.
 
-## Recommended IDE Setup
+<h3>Functional Requirements
 
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-
-## Project Setup
-
-### Install
-
-```bash
-$ pnpm install
-```
-
-### Development
-
-```bash
-$ pnpm dev
-```
-
-### Build
-
-```bash
-# For windows
-$ pnpm build:win
-
-# For macOS
-$ pnpm build:mac
-
-# For Linux
-$ pnpm build:linux
-```
-"# tray-todo-electron" 
+- [ ] Save to-do in local-storage
+- [ ] Window resize
+- [ ] divide to-dos for sections
+- [ ] change to-dos positions
+- [ ] alert for long time to-do not action
+- [ ] to-do status
+- [ ] config window
+- [ ] change the keyboard hotkey
